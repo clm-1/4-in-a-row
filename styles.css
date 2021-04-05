@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap');
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 62,5%;
+  font-family: 'Cabin Sketch', cursive;
+  background: linear-gradient(346deg, rgb(168, 203, 207) 0%, rgb(218, 232, 236) 100%);
+  min-height: 101vh;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.game-container {
+  margin: 0 auto;
+  max-width: 700px;
+  min-height: 100vh;
+  padding: 2rem 1rem 5rem 1rem;
+  position: relative;
+}
+
+.player-info {
+  max-width: 500px;
+  margin: 0 auto .5rem auto;
+  display: flex;
+  justify-content: space-around;
+  padding: .5rem;
+  font-family: 'Cabin Sketch', cursive;
+  font-weight: 600;
+  font-size: 1.1rem;
+  align-items: center;
+  color: #555;
+}
+
+.score-board {
+  font-size: 1.9rem;
+  color: #222;
+  padding: 0 .8rem;
+}
+
+.active-player {
+  text-decoration: underline;
+  color: #111;
+}
+
+.game-board {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 2px 2px 40px rgba(0, 0, 0, 0.068);
+}
+
+.game-squares {
+  margin: 0 auto;
+  max-width: 500px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.slot {
+  position: relative;
+  width: calc(100% / 7);
+  padding-bottom: calc(100% / 7);
+}
+
+/* Each square with hole */
+.gameboard-hole {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 55%, #3a6ecf 25.5%);
+  outline: 1px solid #3e6fcc;
+  background-size: 100% 100%;
+  background-position: 50% 50%;
+  z-index: 6;
+}
+
+.game-info-text {
+  position: relative;
+  padding-top: 2.4rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+/* Gameboard frame */
+.frame {
+  pointer-events: none;
+  z-index: 15;
+  width: 101%;
+  height: 102%;
+  top: 55%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-54%);
+  position: absolute;
+  border-top: 1px solid rgb(149, 191, 247);
+  border-right: 1px solid rgb(59, 79, 192);
+  border-left: 1px solid rgb(84, 141, 216);
+  border-bottom: 4px solid rgb(76, 97, 216);
+}
+
+.foot {
+  position: absolute;
+  z-index: 20;
+  width: 103%;
+  left: 50%;
+  border-radius: 5px 5px 0 0;
+  border-left: 2px solid rgb(84, 141, 216);
+  border-top: 1px solid rgb(84, 147, 230);
+  border-bottom: 1px solid rgba(16, 28, 44, 0.384);
+  border-right: 2px solid rgb(59, 79, 192);
+  transform: translateX(-50%);
+  height: 8px;
+  background: linear-gradient(359deg, rgb(75, 126, 201) 0%, rgb(69, 113, 209) 100%);
+  top: 100%;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.426);
+}
+
+
+.game-piece, .slot-border, .slot-border-highlight, .slot-border-win {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  background-color: rgb(183, 209, 209);
+  z-index: 5;
+}
+
+.slot-border {
+  z-index: 7;
+  width: 83%;
+  height: 83%;
+  background-color: initial;
+  border: 4px solid #3d68b9;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.03);
+}
+
+/* Adds highlight around game board circle */
+.slot-border-highlight {
+  z-index: 7;
+  width: 85%;
+  height: 85%;
+  background-color: initial;
+  border-top: 1px solid rgba(255, 255, 255, 0.17);
+  border-left: 1px solid rgba(255, 255, 255, 0.17);
+  opacity: .6;
+}
+
+.slot-border-win {
+  z-index: 7;
+  width: 73%;
+  height: 73%;
+  background-color: initial;
+  border: 2px solid #dbdbdb7e;
+}
+
+.game-piece {
+  opacity: 0;
+}
+
+@keyframes drop {
+  from {
+    top: -400px;
+  } to {
+    top: 50%;
+  }
+}
+
+.player1-color,
+.player2-color,
+.p1-winner-color,
+.p2-winner-color {
+  opacity: 1;
+}
+
+.player1-color {
+  background: linear-gradient(320deg, rgb(184, 39, 51) 0%, rgb(216, 59, 84) 75%);
+  border: 4px solid rgba(165, 27, 45, 0.644);
+}
+
+.player2-color {
+  background: linear-gradient(320deg, rgb(192, 165, 45) 0%, rgb(233, 202, 64) 75%);
+  border: 4px solid rgba(126, 108, 29, 0.705);
+}
+
+.p1-winner-color {
+  background: linear-gradient(320deg, rgb(192, 45, 65) 0%, rgb(228, 44, 90) 75%);
+}
+
+.p2-winner-color {
+  background: linear-gradient(320deg, rgb(197, 170, 50) 0%, rgb(241, 212, 80) 75%);
+}
+
+.drop-animation {
+  animation-name: drop;
+  animation-duration: .4s;
+}
+
+.display-none {
+  display: none;
+}
+
+/* Column to click */
+.game-column {
+  opacity: 0%;
+  position: absolute;
+  width: calc(100% / 7);
+  height: 100%;
+  z-index: 10; 
+  cursor: pointer;
+}
+
+/* Position of each game column */
+.c2 {
+  left: calc(100% / 7);
+}
+
+.c3 {
+  left: calc(100% / 7 * 2);
+}
+
+.c4 {
+  left: calc(100% / 7 * 3);
+}
+
+.c5 {
+  left: calc(100% / 7 * 4);
+}
+
+.c6 {
+  left: calc(100% / 7 * 5);
+}
+
+.c7 {
+  left: calc(100% / 7 * 6);
+}
+
+@media screen and (min-width: 300px) {
+  .slot-border {
+    border: 4px solid #477bdb;
+  }
+
+  .frame {
+    border-top: 2px solid rgb(149, 191, 247);
+    border-right: 3px solid rgb(59, 79, 192);
+    border-left: 3px solid rgb(84, 141, 216);
+    border-bottom: 6px solid rgb(76, 97, 216);
+  }
+
+  .foot {
+    height: 14px;
+    width: 102%;
+  }
+
+  .player-info {
+    margin: 0 auto .5rem auto;
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .score-board {
+    font-size: 1.9rem;
+  }
+}
+
+@media screen and (min-width: 400px) {
+  .slot-border {
+    border: 6px solid #477bdb;
+  }
+
+  .frame {
+    border-top: 2px solid rgb(149, 191, 247);
+    border-right: 5px solid rgb(59, 79, 192);
+    border-left: 5px solid rgb(84, 141, 216);
+    border-bottom: 10px solid rgb(76, 97, 216);
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .player-info {
+    margin: 0 auto .6rem auto;
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .score-board {
+    font-size: 2.6rem;
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .player-info {
+    font-size: 1.8rem;
+  }
+
+  .score-board {
+    font-size: 3rem;
+  }
+}
