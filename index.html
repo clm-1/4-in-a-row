@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4 in a row 4</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>  
+  <div class="game-container">
+    <h1 class="game-title">4 IN A ROW</h1>
+    <div class="player-info">
+      <span class="player-1 active-player">PLAYER 1</span>
+      <span class="score-board">0 - 0</span>
+      <span class="player-2">PLAYER 2</span>
+    </div>
+    <div class="game-board">
+      <div class="frame"></div>
+      <div class="foot"></div>
+  
+      <div class="game-column c1" data-start-index="0"></div>
+      <div class="game-column c2" data-start-index="1"></div>
+      <div class="game-column c3" data-start-index="2"></div>
+      <div class="game-column c4" data-start-index="3"></div>
+      <div class="game-column c5" data-start-index="4"></div>
+      <div class="game-column c6" data-start-index="5"></div>
+      <div class="game-column c7" data-start-index="6"></div>
+
+      <div class="game-squares">
+        <!-- Insert with JS here -->
+      </div>
+
+    </div>
+    <p class="game-info-text display-none">Click on the board to start a new game!</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
